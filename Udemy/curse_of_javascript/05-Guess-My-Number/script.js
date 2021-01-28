@@ -6,7 +6,7 @@
 
 // document.querySelector('.guess').value;
 
-let numberOfMachine = Math.trunc(Math.random() * 20) + 1;
+let numberOfMachine = Math.trunc(Math.random() * 100) + 1;
 let score = 20;
 let highScore = 0;
 
@@ -21,7 +21,7 @@ document.querySelector('.again').addEventListener('click', function() {
     document.querySelector('.score').textContent = score;
     document.querySelector('body').style.backgroundColor = '#222';
     document.querySelector('.guess').value = '';
-    numberOfMachine = Math.trunc(Math.random() * 20) + 1;
+    numberOfMachine = Math.trunc(Math.random() * 100) + 1;
 });
 
 document.querySelector('.check').addEventListener('click', function() {
@@ -47,6 +47,7 @@ document.querySelector('.check').addEventListener('click', function() {
             document.querySelector('.score').textContent = score;
         } else {
             displayMassage('💣 You lost the game');
+            document.querySelector('body').style.backgroundColor = 'red';
             document.querySelector('.score').textContent = 0;
         }
     }
