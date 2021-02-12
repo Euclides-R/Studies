@@ -20,6 +20,40 @@ TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Th
 
 GOOD LUCK 😀
 
+// 1
+const [players1, players2] = game.players;
+console.log(players1, players2);
+
+// 2
+const [gk, ...fieldPlayer] = players1;
+console.log(gk, fieldPlayer);
+
+// 3
+const allPlayers = [...players1, ...players2];
+console.log(allPlayers);
+
+// 4
+const players1Final = [...players1, 'Thiago', 'Coutinho', 'Peresic'];
+console.log(players1Final);
+
+// 5
+const {
+  odds: { team1, x: draw, team2 },
+} = game;
+console.log(team1, draw, team2);
+
+// 6
+const printGoals = function (...players) {
+  console.log(players);
+  console.log(`${players.length} goals were scored`);
+};
+printGoals(...game.scored);
+
+// 7
+team1 < team2 && console.log('Team 1 is more likely to win');
+team1 > team2 && console.log('Team 2 is more likely to win');
+*/
+
 const game = {
   team1: 'Bayern Munich',
   team2: 'Borrussia Dortmund',
@@ -60,55 +94,75 @@ const game = {
     team2: 6.5,
   },
 };
-
 // 1
-const [players1, players2] = game.players;
-console.log(players1, players2);
+for (const [i, player] of game.scored.entries()) {
+  console.log(`Goal ${i + 1}: ${player}`);
+}
 
-// 2
-const [gk, ...fieldPlayer] = players1;
-console.log(gk, fieldPlayer);
+// 2 Refactor variable values to cleaner code
+const odds = Object.values(game.odds);
+let average = 0;
+for (const odd of odds) average += odd;
+average /= odds.length;
+console.log(average);
 
 // 3
-const allPlayers = [...players1, ...players2];
-console.log(allPlayers);
+for (const [team, odd] of Object.entries(game.odds)) {
+  const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`;
+  console.log(`Odd of ${teamStr}: ${odd}`);
+}
 
-// 4
-const players1Final = [...players1, 'Thiago', 'Coutinho', 'Peresic'];
-console.log(players1Final);
+///////////////////////////////////////
+// Coding Challenge #2
 
-// 5
-const {
-  odds: { team1, x: draw, team2 },
-} = game;
-console.log(team1, draw, team2);
+/* 
+Let's continue with our football betting app!
 
-// 6
-const printGoals = function (...players) {
-  console.log(players);
-  console.log(`${players.length} goals were scored`);
-};
-printGoals(...game.scored);
+1. Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski")
+2. Use a loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember)
+3. Print the 3 odds to the console, but in a nice formatted way, exaclty like this:
+      Odd of victory Bayern Munich: 1.33
+      Odd of draw: 3.25
+      Odd of victory Borrussia Dortmund: 6.5
+Get the team names directly from the game object, don't hardcode them (except for "draw"). HINT: Note how the odds and the game objects have the same property names 😉
 
-// 7
-team1 < team2 && console.log('Team 1 is more likely to win');
-team1 > team2 && console.log('Team 2 is more likely to win');
+BONUS: Create an object called 'scorers' which contains the names of the players who scored as properties, and the number of goals as the value. In this game, it will look like this:
+      {
+        Gnarby: 1,
+        Hummels: 1,
+        Lewandowski: 2
+      }
+
+GOOD LUCK 😀
 */
 
-const weekDays = ['mon', 'tue', 'wed', 'thu', 'sat', 'sun'];
+/*
+const weekDays = [
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday',
+  'sunday',
+];
 
 const openingHours = {
-  thu: {
-    open: 12,
-    close: 22,
+  [weekDays[3]]: {
+    open: '11h00',
+    close: '22h00',
   },
-  fri: {
-    open: 12,
-    close: 22,
+  [weekDays[4]]: {
+    open: '11h00',
+    close: '23h00',
   },
-  sat: {
-    open: 12,
-    close: 22,
+  [weekDays[5]]: {
+    open: '12h00',
+    close: '00h00',
+  },
+  [weekDays[6]]: {
+    open: '00h00',
+    close: '23h59',
   },
 };
 
@@ -139,15 +193,50 @@ const restaurant = {
   },
 };
 
-// EXAMPLE
-const days = ['mon', 'tue', 'wed', 'thu', 'sat', 'sun'];
+////////////////////////////////////////////////////////////////
+// Looping Objects: Object Keys, Values and Entries
+
+// Property NAMES
+const properties = Object.keys(openingHours);
+console.log(properties);
+
+let openStr = `We are open on ${properties.length} days: `;
+for (const day of properties) {
+  openStr += `${day} `;
+}
+console.log(openStr);
+
+// Property VALUES
+const values = Object.values(openingHours);
+console.log(values);
+
+// Entrie Object
+const entries = Object.entries(openingHours);
+// console.log(entries);
+
+for (const [key, { open, close }] of entries) {
+  console.log(`On ${key} we open at ${open} and close at ${close}`);
+}
+*/
+////////////////////////////////
+// Optional Chaining
+/*
+EXAMPLE ?. Checks the components to see if they exist
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
 for (const day of days) {
-  console.log(day);
-  restaurant.openingHours[day]?.;
+  const open = restaurant.openingHours[day]?.open ?? 'closed';
+  console.log(`On ${day}, we open at ${open}`);
+
+  // const close = restaurant.openingHours[day]?.close;
+  // if (open) {
+  //   console.log(`On ${day}, we open at ${open} and close ${close}`);
+  // } else {
+  //   console.log(`On ${day} we don't open`);
+  // }
 }
 
-/*
+
 if (restaurant.openingHours && restaurant.openingHours.mon) {
   console.log(restaurant.openingHours.mon.open);
 }
@@ -181,10 +270,10 @@ console.log(guests);
 // Nullish: null and undefined (NOT 0 or '')
 const guestCorrect = restaurant.numGuests ?? 10;
 console.log(guestCorrect);
-
+*/
 ///////////////////////////////
 //Short Circuiting (&& and ||)
-
+/*
 console.log('---- OR ----');
 // Use ANY data type, return ANY data type, short-circuiting
 console.log(3 || 'Jonas');
@@ -213,11 +302,10 @@ if (restaurant.orderPizza) {
 }
 
 restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
-
-
+*/
 ///////////////////////////////////////
 // Rest Pattern and Parameters
-// 1) Destructuring
+/* 1) Destructuring
 
 // SPREAD, because on RIGHT side of =
 const arr = [1, 2, ...[3, 4]];
@@ -252,10 +340,10 @@ add(...x);
 
 restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
 restaurant.orderPizza('mushrooms');
-
+*/
 //////////////////////////////////////////
 // The Spreed Operator
-// Object
+/* Object
 const newRestaurant = { foundedIn: 1998, ...restaurant, founder: 'Guiseppe' };
 console.log(newRestaurant);
 
@@ -323,10 +411,10 @@ const {
   fri: { open: o, close: c },
 } = openingHours;
 console.log(o, c);
-
-
+*/
 /////////////////////////////////////////////////
 // Destruting Arrays
+/*
 const arr = [2, 3, 4];
 const a = arr[0];
 const b = arr[1];
