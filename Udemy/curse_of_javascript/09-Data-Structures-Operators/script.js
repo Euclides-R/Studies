@@ -1,5 +1,97 @@
 'use strict';
 
+//////////////////// Code principal
+
+const weekDays = [
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday',
+  'sunday',
+];
+
+const openingHours = {
+  [weekDays[3]]: {
+    open: '11h00',
+    close: '22h00',
+  },
+  [weekDays[4]]: {
+    open: '11h00',
+    close: '23h00',
+  },
+  [weekDays[5]]: {
+    open: '12h00',
+    close: '00h00',
+  },
+  [weekDays[6]]: {
+    open: '00h00',
+    close: '23h59',
+  },
+};
+
+const restaurant = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+
+  // ES6 cnhenced oject literals
+  openingHours,
+
+  order(starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+
+  orderDelivery({ starterIndex, mainIndex, time, address }) {
+    console.log(
+      `Order received ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
+  },
+
+  orderPasta(ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
+    );
+  },
+};
+
+const ordersSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza',
+]);
+
+// console.log(ordersSet);
+
+// console.log(new Set('Junior'));
+
+// console.log(ordersSet.size);
+// console.log(ordersSet.has('Pizza'));
+// console.log(ordersSet.has('Bread'));
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');
+// ordersSet.clear();
+console.log(ordersSet);
+
+for (const order of ordersSet) console.log(order);
+
+// Example
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+
+const staffUnique = [...new Set(staff)];
+console.log(staffUnique);
+
+//////////////////////////////////////
+// Maps: Fundamentals
+
+const rest = new Map();
+
 ///////////////////////////////////////
 // Coding Challenge #1
 
@@ -52,7 +144,6 @@ printGoals(...game.scored);
 // 7
 team1 < team2 && console.log('Team 1 is more likely to win');
 team1 > team2 && console.log('Team 2 is more likely to win');
-*/
 
 const game = {
   team1: 'Bayern Munich',
@@ -110,12 +201,11 @@ console.log(average);
 for (const [team, odd] of Object.entries(game.odds)) {
   const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`;
   console.log(`Odd of ${teamStr}: ${odd}`);
-}
+} 
 
 ///////////////////////////////////////
 // Coding Challenge #2
-
-/* 
+ 
 Let's continue with our football betting app!
 
 1. Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski")
@@ -137,62 +227,6 @@ GOOD LUCK 😀
 */
 
 /*
-const weekDays = [
-  'monday',
-  'tuesday',
-  'wednesday',
-  'thursday',
-  'friday',
-  'saturday',
-  'sunday',
-];
-
-const openingHours = {
-  [weekDays[3]]: {
-    open: '11h00',
-    close: '22h00',
-  },
-  [weekDays[4]]: {
-    open: '11h00',
-    close: '23h00',
-  },
-  [weekDays[5]]: {
-    open: '12h00',
-    close: '00h00',
-  },
-  [weekDays[6]]: {
-    open: '00h00',
-    close: '23h59',
-  },
-};
-
-const restaurant = {
-  name: 'Classico Italiano',
-  location: 'Via Angelo Tavanti 23, Firenze, Italy',
-  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
-  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
-  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-
-  // ES6 cnhenced oject literals
-  openingHours,
-
-  order(starterIndex, mainIndex) {
-    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
-  },
-
-  orderDelivery({ starterIndex, mainIndex, time, address }) {
-    console.log(
-      `Order received ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
-    );
-  },
-
-  orderPasta(ing1, ing2, ing3) {
-    console.log(
-      `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
-    );
-  },
-};
-
 ////////////////////////////////////////////////////////////////
 // Looping Objects: Object Keys, Values and Entries
 
