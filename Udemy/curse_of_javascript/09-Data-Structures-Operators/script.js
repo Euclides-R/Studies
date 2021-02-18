@@ -59,6 +59,24 @@ const restaurant = {
 };
 
 /////////////////////////////
+// Maps: Interation
+
+const question = new Map([
+    ['question', 'Waht is the best programming language in the world?'],
+    [1, 'C'],
+    [2, 'Java'],
+    [3, 'JavaScript'],
+    ['correct', 3],
+    [true, 'Correct 🎉!!'],
+    [false, 'Incorrect ‼'],
+]);
+console.log(question);
+
+// Convert object to map
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap);
+
+/////////////////////////////
 // Sets
 /*
 const ordersSet = new Set([
@@ -92,11 +110,12 @@ console.log(staffUnique);
 */
 //////////////////////////////////////
 // Maps: Fundamentals
+/*
 const rest = new Map();
 // add news categories in the map
 rest.set('name', 'Classico Italiano');
 rest.set(1, 'Firenze, Italy');
-console.log(rest.set(2, 'Lisbon, Portugal'));
+// console.log(rest.set(2, 'Lisbon, Portugal'));
 
 rest
     .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
@@ -113,7 +132,7 @@ const time = 21;
 console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
 // We can delete elements in the map
 rest.delete(2);
-// rest.clear();
+rest.clear();
 
 const arr = [1, 2];
 rest.set(arr, 'Test');
@@ -122,10 +141,9 @@ console.log(rest);
 console.log(rest.size);
 
 console.log(rest.get(arr));
-
+*/
 ///////////////////////////////////////
 // Coding Challenge #1
-
 /* 
                 We're building a football betting app (soccer for my American friends 😅)!
 
