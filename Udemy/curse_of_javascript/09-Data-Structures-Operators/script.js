@@ -1,81 +1,97 @@
 'use strict';
 
 //////////////////// Code principal
-
+/*
 const weekDays = [
-    'monday',
-    'tuesday',
-    'wednesday',
-    'thursday',
-    'friday',
-    'saturday',
-    'sunday',
+  'monday',
+  'tuesday',
+  'wednesday',
+  'thursday',
+  'friday',
+  'saturday',
+  'sunday',
 ];
 
 const openingHours = {
-    [weekDays[3]]: {
-        open: '11h00',
-        close: '22h00',
-    },
-    [weekDays[4]]: {
-        open: '11h00',
-        close: '23h00',
-    },
-    [weekDays[5]]: {
-        open: '12h00',
-        close: '00h00',
-    },
-    [weekDays[6]]: {
-        open: '00h00',
-        close: '23h59',
-    },
+  [weekDays[3]]: {
+    open: '11h00',
+    close: '22h00',
+  },
+  [weekDays[4]]: {
+    open: '11h00',
+    close: '23h00',
+  },
+  [weekDays[5]]: {
+    open: '12h00',
+    close: '00h00',
+  },
+  [weekDays[6]]: {
+    open: '00h00',
+    close: '23h59',
+  },
 };
 
 const restaurant = {
-    name: 'Classico Italiano',
-    location: 'Via Angelo Tavanti 23, Firenze, Italy',
-    categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
-    starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
-    mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
 
-    // ES6 cnhenced oject literals
-    openingHours,
+  // ES6 cnhenced oject literals
+  openingHours,
 
-    order(starterIndex, mainIndex) {
-        return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
-    },
+  order(starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
 
-    orderDelivery({ starterIndex, mainIndex, time, address }) {
-        console.log(
-            `Order received ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
-        );
-    },
+  orderDelivery({ starterIndex, mainIndex, time, address }) {
+    console.log(
+      `Order received ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+    );
+  },
 
-    orderPasta(ing1, ing2, ing3) {
-        console.log(
-            `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
-        );
-    },
+  orderPasta(ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
+    );
+  },
 };
 
 /////////////////////////////
 // Maps: Interation
 
 const question = new Map([
-    ['question', 'Waht is the best programming language in the world?'],
-    [1, 'C'],
-    [2, 'Java'],
-    [3, 'JavaScript'],
-    ['correct', 3],
-    [true, 'Correct 🎉!!'],
-    [false, 'Incorrect ‼'],
+  ['question', 'Waht is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct 🎉!!'],
+  [false, 'Incorrect ‼'],
 ]);
-console.log(question);
+// console.log(question);
 
 // Convert object to map
 const hoursMap = new Map(Object.entries(openingHours));
-console.log(hoursMap);
+// console.log(hoursMap);
 
+// Quiz app
+console.log(question.get('question'));
+for (const [key, value] of question) {
+  if (typeof key === 'number') console.log(`Answer ${key} : ${value}`);
+}
+const answer = Number(prompt('Your Asnwer'));
+console.log(answer);
+
+console.log(question.get(question.get('correct') === answer));
+
+// Convert map to array
+console.log([...question]);
+console.log(question.entries());
+console.log([...question.keys()]);
+console.log([...question.values()]);
+*/
 /////////////////////////////
 // Sets
 /*
@@ -193,87 +209,137 @@ console.log(rest.get(arr));
                 // 7
                 team1 < team2 && console.log('Team 1 is more likely to win');
                 team1 > team2 && console.log('Team 2 is more likely to win');
+*/
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
+///////////////////////////////////////
+// Coding Challenge #3
+/* 
+Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game. The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
 
-                const game = {
-                  team1: 'Bayern Munich',
-                  team2: 'Borrussia Dortmund',
-                  players: [
-                    [
-                      'Neuer',
-                      'Pavard',
-                      'Martinez',
-                      'Alaba',
-                      'Davies',
-                      'Kimmich',
-                      'Goretzka',
-                      'Coman',
-                      'Muller',
-                      'Gnarby',
-                      'Lewandowski',
-                    ],
-                    [
-                      'Burki',
-                      'Schulz',
-                      'Hummels',
-                      'Akanji',
-                      'Hakimi',
-                      'Weigl',
-                      'Witsel',
-                      'Hazard',
-                      'Brandt',
-                      'Sancho',
-                      'Gotze',
-                    ],
-                  ],
-                  score: '4:0',
-                  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
-                  date: 'Nov 9th, 2037',
-                  odds: {
-                    team1: 1.33,
-                    x: 3.25,
-                    team2: 6.5,
-                  },
-                };
-                // 1
-                for (const [i, player] of game.scored.entries()) {
-                  console.log(`Goal ${i + 1}: ${player}`);
-                }
+1. Create an array 'events' of the different game events that happened (no duplicates)
+2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+      [FIRST HALF] 17: ⚽️ GOAL
 
-                // 2 Refactor variable values to cleaner code
-                const odds = Object.values(game.odds);
-                let average = 0;
-                for (const odd of odds) average += odd;
-                average /= odds.length;
-                console.log(average);
+GOOD LUCK 😀
+*/
 
-                // 3
-                for (const [team, odd] of Object.entries(game.odds)) {
-                  const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`;
-                  console.log(`Odd of ${teamStr}: ${odd}`);
-                } 
+const gameEvents = new Map([
+  [17, '⚽️ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽️ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽️ GOAL'],
+  [80, '⚽️ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
 
-                ///////////////////////////////////////
-                // Coding Challenge #2
-                 
-                Let's continue with our football betting app!
+// 1
+const events = [...new Set(gameEvents.values())];
+console.log(events);
 
-                1. Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski")
-                2. Use a loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember)
-                3. Print the 3 odds to the console, but in a nice formatted way, exaclty like this:
-                      Odd of victory Bayern Munich: 1.33
-                      Odd of draw: 3.25
-                      Odd of victory Borrussia Dortmund: 6.5
-                Get the team names directly from the game object, don't hardcode them (except for "draw"). HINT: Note how the odds and the game objects have the same property names 😉
+// 2
+gameEvents.delete(64);
+console.log(gameEvents);
 
-                BONUS: Create an object called 'scorers' which contains the names of the players who scored as properties, and the number of goals as the value. In this game, it will look like this:
-                      {
-                        Gnarby: 1,
-                        Hummels: 1,
-                        Lewandowski: 2
-                      }
+// 3
+const med = 90 / gameEvents.size;
+console.log(`An event happened, on average, every ${med} minutes`);
 
-                GOOD LUCK 😀
-                */
+// 4
+for (const eventInGame of gameEvents) {
+  const [key, value] = eventInGame;
+  let half = 'FIRST HALF';
+  if (key > 45) {
+    half = 'SECOND HALF';
+  }
+  console.log(`[${half}] ${key}: ${value}`);
+}
+
+/*
+// 1
+for (const [i, player] of game.scored.entries()) {
+  console.log(`Goal ${i + 1}: ${player}`);
+}
+
+// 2 Refactor variable values to cleaner code
+const odds = Object.values(game.odds);
+let average = 0;
+for (const odd of odds) average += odd;
+average /= odds.length;
+console.log(average);
+
+// 3
+for (const [team, odd] of Object.entries(game.odds)) {
+  const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`;
+  console.log(`Odd of ${teamStr}: ${odd}`);
+}
+*/
+///////////////////////////////////////
+// Coding Challenge #2
+/* 
+Let's continue with our football betting app!
+
+1. Loop over the game.scored array and print each player name to the console, along with the goal number (Example: "Goal 1: Lewandowski")
+2. Use a loop to calculate the average odd and log it to the console (We already studied how to calculate averages, you can go check if you don't remember)
+3. Print the 3 odds to the console, but in a nice formatted way, exaclty like this:
+Odd of victory Bayern Munich: 1.33
+Odd of draw: 3.25
+Odd of victory Borrussia Dortmund: 6.5
+Get the team names directly from the game object, don't hardcode them (except for "draw"). HINT: Note how the odds and the game objects have the same property names 😉
+BONUS: Create an object called 'scorers' which contains the names of the players who scored as properties, and the number of goals as the value. In this game, it will look like this:
+{
+Gnarby: 1,
+Hummels: 1,
+Lewandowski: 2
+}
+
+GOOD LUCK 😀
+*/
 
 /*
                 ////////////////////////////////////////////////////////////////
