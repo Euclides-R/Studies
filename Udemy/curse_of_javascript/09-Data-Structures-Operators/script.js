@@ -57,10 +57,87 @@ const restaurant = {
         );
     },
 };
+//////////////////////////////
+// Working with string #2
+const airline = 'TAP Air Brazil';
+console.log(airline);
 
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+
+// Fix capitalization in name
+const passenger = 'eUcliDes'; // Euclides
+const passengerLower = passenger.toLowerCase();
+const passengerCorrect =
+    passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerCorrect);
+
+// Comparing emails
+const email = 'hello@euclides.io';
+const loginEmail = ' Hello@Euclides.Io';
+
+const lowerEmail = loginEmail.toLowerCase();
+const trimmedEmail = lowerEmail.trim();
+// simple mode
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+
+// Replacing
+const priceGB = '288,97€';
+const priceUS = priceGB.replace('€', '$').replace(',', '.');
+console.log(priceUS);
+
+const announcement =
+    'All passengers come to boarding door 23. Boarding door 23!';
+
+console.log(announcement.replace('door', 'gate')); // replaceAll don't existing
+console.log(announcement.replace(/door/g, 'gate')); // this code is all replace
+
+//////////////////////////////
+// Working with string #1
+/*
+const airline = 'TAP Air Brazil';
+const plane = 'A320';
+
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[2]);
+console.log('B737' [0]);
+
+console.log(airline.length);
+console.log('B737'.length);
+
+console.log(airline.indexOf('r'));
+console.log(airline.lastIndexOf('r'));
+console.log(airline.indexOf('Brasil')); // case sensitive for upper and lowercase
+
+console.log(airline.slice(8)); // Don't remember starter 0
+console.log(airline.slice(4, 7));
+
+console.log(airline.slice(0, airline.indexOf(' ')));
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+console.log(airline.slice(-2));
+console.log(airline.slice(1, -1));
+
+const checkMiddleSeat = function(seat) {
+    // B and E are middle seats
+    const s = seat.slice(-1);
+    if (s === 'B' || s === 'E') console.log('You got the middle seat 😐');
+    else console.log('You got lucky 😎');
+};
+
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3B');
+
+console.log(new String('jonas'));
+console.log(typeof new String('jonas'));
+
+console.log(typeof new String('jonas').slice(1)); *
+/
 /////////////////////////////
 // Maps: Interation
-
+/*
 const question = new Map([
     ['question', 'Waht is the best programming language in the world?'],
     [1, 'C'],
@@ -75,7 +152,7 @@ console.log(question);
 // Convert object to map
 const hoursMap = new Map(Object.entries(openingHours));
 console.log(hoursMap);
-
+*/
 /////////////////////////////
 // Sets
 /*
