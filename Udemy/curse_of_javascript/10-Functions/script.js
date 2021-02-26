@@ -132,3 +132,90 @@ greetArr('Hello')('Euclides');
 
 //////////////////////////////////
 // The call and apply Methods
+
+const lufthansa = {
+    airline: 'Lufthansa',
+    iataCode: 'LH',
+    bookings: [],
+    // book: function
+    book(flightNum, name) {
+        console.log(
+            `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+        );
+        this.bookings.push({ flight: `${this.iataCode}${flightNum} `, name });
+    },
+};
+
+// lufthansa.book(239, 'Euclides Rodrigues Junior');
+// lufthansa.book(635, 'Verônica Cordeiro Rodrigues');
+// console.log(lufthansa);
+
+const eurowings = {
+    name: 'Eurowings',
+    iataCode: 'EW',
+    bookings: [],
+};
+
+const book = lufthansa.book;
+
+// Does NOT work
+// book(23, 'Sarah Williams)
+
+// book.call(eurowings, 23, 'Sarah Williams');
+// console.log(eurowings);
+
+// The assigment "call" do realizity comunication between one function and another
+// howerver much the method was inside the function lufthansa, we can access in the
+// method in another function.
+// "Call" nada mais é do que um ponteiro.
+
+const swiss = {
+    name: 'Swiss Air Lines',
+    iataCode: 'LX',
+    bookings: [],
+};
+
+// book.call(swiss, 53, 'Mary Cooper');
+
+// Apply Method
+const flightData = [583, 'George Cooper'];
+/* Mas "apply" não é mais usado do js moderno, "apply" tem a necessidade de ter uma matriz de dados porque há um jeito melhor
+call pode usar os '...', assim inserindo apenas um array de dados continuos
+book.apply(swiss, flightData);
+
+book.call(swiss, ...flightData);
+console.log(swiss);
+
+/////////////////////////////////////////////////////////
+// The bind Method
+/* Just like the call method, bind also allows us to access a method from another function, however
+bind does not immediately call a function, but returns a new function where the word 'diski' is linked
+book.call(eurowings, 23, 'Sarah Williams');
+
+const bookEW = book.bind(eurowings);
+const bookLH = book.bind(lufthansa);
+const bookLX = book.bind(swiss);
+
+bookEW(23, 'Steven Williams');
+*/
+const bookEW23 = book.bind(eurowings, 23);
+// bookEW23('Jonas Schmedtmann');
+// bookEW23('Martha Cooper');
+
+// With Event Listeners
+lufthansa.planes = 300;
+lufthansa.buyPlane = function() {
+    console.log(this);
+
+    this.planes++;
+    console.log(this.planes);
+};
+
+document
+    .querySelector('.buy')
+    .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+/* Para que seja possível acessar a função "buyplane" é necessário colocar um ponteiro para ela
+uma key, call chamaria instantaneamente, mas não queremos isso, queremos só durante o evento
+por isso usamaos bind */
+
+// Partial Aplication
