@@ -59,7 +59,6 @@ checkIn(flight, Euclides);
 
 //////////////////////////////////////////////
 // First-Class and Higher-Order Functions
-
 /*
 Portanto, JS é uma lingugagem que possui funções de primeira classe, o que em termos
 técnicos significa que as funções são os chamados de primeiros cidadãos. Na prática,
@@ -238,8 +237,8 @@ const addVAT2 = addTaxRate(0.23);
 console.log(addVAT2(100));
 */
 
+//////////////////////////////////////
 // Coding Challenge #1
-
 /*
 Vamos construir um aplicativo de enquete simples!
 
@@ -269,33 +268,94 @@ DADOS DE TESTE DE BÔNUS 1: [5, 2, 3]
 DADOS DE TESTE DE BÔNUS 2: [1, 5, 3, 9, 6, 1]
 
 BOA SORTE 😀
-*/
-const poll = {
-    question: 'What is your favourite programing language?',
-    options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
-    // This generates [0, 0, 0, 0]. More in the next section
-    answers: new Array(4).fill(0),
-    registerNewAnswer(youAnswer) {
-        const getAnswer = prompt(
-            ' What is your favourite programming language? 0: JavaScript 1: Python 2: Rust 3: C++ (Write option number)'
-        );
-        if (
-            getAnswer === '0' ||
-            getAnswer === '1' ||
-            getAnswer === '2' ||
-            getAnswer === '3'
-        ) {
-            this.answers[getAnswer] = this.answers[getAnswer] + 1;
-            this.displayResults;
-        } else {
-            console.log('This number is not option!');
-        }
-    },
-    displayResults(type) {
-        console.log(`${}`);
-    },
-};
 
-document.querySelector('.poll').addEventListener('click', function() {
-    poll.registerNewAnswer();
-});
+const poll = {
+  question: 'What is your favourite programming language?',
+  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+  // This generates [0, 0, 0, 0]. More in the next section 😃
+  answers: new Array(4).fill(0),
+  registerNewAnswer() {
+    // Get answer
+    const answer = Number(
+      prompt(
+        `${this.question}\n${this.options.join('\n')}\n(Write option number)`
+      )
+    );
+    console.log(answer);
+
+    // Register answer
+    typeof answer === 'number' &&
+      answer < this.answers.length &&
+      this.answers[answer]++;
+
+    this.displayResults();
+    this.displayResults('string');
+  },
+
+  // Professor
+
+  /* Como eu fiz
+    if (
+      getAnswer === '0' ||
+      getAnswer === '1' ||
+      getAnswer === '2' ||
+      getAnswer === '3'
+    ) {
+      this.answers[getAnswer] = this.answers[getAnswer] + 1;
+      this.displayResults(this.answers);
+    } else {
+      console.log('This number is not option!');
+    }
+
+  displayResults(type = 'array') {
+    if (type === 'array') {
+      console.log(this.answers);
+    } else if (type === 'string') {
+      // Poll results are 13, 2, 4, 1
+      console.log(`Poll results are ${this.answers.join(', ')}`);
+    }
+  },
+};
+//   displayResults(type) {
+//     console.log(this.answers);
+//     console.log(`Poll results are ${type}`);
+//   },
+
+document
+  .querySelector('.poll')
+  .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+document
+  .querySelector('.poll')
+  .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] });
+
+// [5, 2, 3]
+// [1, 5, 3, 9, 6, 1]
+*/
+
+///////////////////////////////////////////////////
+// Immediately Invoked Function Expressions (IIFE)
+
+const runOnce = function () {
+  console.log('Thie will never run again');
+};
+runOnce();
+
+(function () {
+  console.log('This will never run again');
+  const isPrivate = 23;
+})();
+
+// console.log(isPrivate);
+
+(() => console.log('This will ALSO never run again'))();
+
+{
+  // const isPrivate = 23;
+  var notPrivate = 46;
+}
+console.log(notPrivate);
