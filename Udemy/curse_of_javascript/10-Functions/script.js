@@ -339,7 +339,7 @@ poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] });
 
 ///////////////////////////////////////////////////
 // Immediately Invoked Function Expressions (IIFE)
-
+/*
 const runOnce = function () {
   console.log('Thie will never run again');
 };
@@ -359,3 +359,47 @@ runOnce();
   var notPrivate = 46;
 }
 console.log(notPrivate);
+*/
+
+////////////////////////////////////////////////////////////////
+// Closures
+/*
+O encerramento é basicamente esse ambiente de variável anexado à função
+exatamente como estava na hora e local em que a função foi criada
+
+const secureBooking = function() {
+    let passengerCount = 0;
+    // O retorno da função manter o valor da variável ativa
+    return function() {
+        passengerCount++;
+        console.log(`${passengerCount} passengers`);
+    };''
+};
+
+const booker = secureBooking();
+
+booker();
+booker();
+booker();
+*/
+///////////////////////////////////////
+// Coding Challenge #2
+
+/* 
+This is more of a thinking challenge than a coding challenge 🤓
+
+Take the IIFE below and at the end of the function, attach an event listener that changes the color of the selected h1 element ('header') to blue, each time the BODY element is clicked. Do NOT select the h1 element again!
+
+And now explain to YOURSELF (or someone around you) WHY this worked! Take all the time you need. Think about WHEN exactly the callback function is executed, and what that means for the variables involved in this example.
+
+GOOD LUCK 😀
+*/
+
+(function() {
+    const header = document.querySelector('h1');
+    header.style.color = 'red';
+
+    document.querySelector('h1').addEventListener('click', function() {
+        header.style.color = 'blue';
+    });
+})();
