@@ -283,9 +283,6 @@ movements.forEach(function(mov, i, arr) {
 // 1: function(450)
 // 2: function(400)
 // ...
-<<<<<<< HEAD
->>>>>>> refs/remotes/origin/master
-=======
 
 ///////////////////////////////////////
 // forEach With Maps and Sets
@@ -347,5 +344,5 @@ const checkDogs = function (dogsJulia, dogsKate) {
   });
 };
 // checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
-checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
->>>>>>> branch-PC
+checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]); 
+*/
