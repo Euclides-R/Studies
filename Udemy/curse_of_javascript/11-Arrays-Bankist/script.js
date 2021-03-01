@@ -217,7 +217,7 @@ const checkDogs = function (dogsJulia, dogsKate) {
 // checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
 checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
 */
-=======
+
 /////////////////////////////////////////////////
 // Simple methods in Array
 /*
@@ -254,8 +254,6 @@ console.log([...arr, ...arr2]);
 console.log(letters.join(' - '));
 <<<<<<< HEAD
 */
-=======
->>>>>>> branch-PC
 
 ////////////////////////////////////////////
 // Lopping Arrays: forEach
@@ -264,20 +262,20 @@ const movementsSch = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // for (const movement of movements) {
 for (const [i, movement] of movements.entries()) {
-    if (movement > 0) {
-        console.log(`Movement ${i + 1}: You deposited ${movement}`);
-    } else {
-        console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
-    }
+  if (movement > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(movement)}`);
+  }
 }
 
 console.log('---- FOREACH ----');
-movements.forEach(function(mov, i, arr) {
-    if (mov > 0) {
-        console.log(`Movement ${i + 1}: You deposited ${mov}`);
-    } else {
-        console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
-    }
+movements.forEach(function (mov, i, arr) {
+  if (mov > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${mov}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
+  }
 });
 // 0: function(200)
 // 1: function(450)
@@ -287,6 +285,7 @@ movements.forEach(function(mov, i, arr) {
 ///////////////////////////////////////
 // forEach With Maps and Sets
 // Map
+/*
 const currencies = new Map([
   ['USD', 'United States dollar'],
   ['EUR', 'Euro'],
@@ -304,7 +303,6 @@ currenciesUnique.forEach(function (value, _, map) {
   console.log(`${value}: ${value}`);
 });
 */
-
 ///////////////////////////////////////
 // Coding Challenge #1
 
