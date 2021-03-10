@@ -6,8 +6,8 @@
 
 // Data
 const account1 = {
-  owner: 'Jonas Schmedtmann',
-  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  owner: 'Euclides Rodrigues Junior',
+  movements: [2000, 4050, -400, 3000, -650, -130, 700, 10300],
   interestRate: 1.2, // %
   pin: 1111,
 };
@@ -61,8 +61,13 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
-  movements.forEach(function (mov, i) {
+const displayMovements = function (movements, sort) {
+  containerMovements.innerHTML = '';
+  // .textcontent = 0;
+
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `<div class="movements__row"><div class="movements__type movements__type--${type}">${
@@ -206,6 +211,76 @@ btnClose.addEventListener('click', function (e) {
   }
   inputCloseUsername.value = inputClosePin.value = '';
 });
+
+let sorted = false; // We want it to return both false and true after the click
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+});
+
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+// Array Methos in pratice
+/*
+// 1.
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((sum, cur) => sum + cur, 0);
+
+console.log(bankDepositSum);
+
+// 2.
+// const numDeposits1000 = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov >= 1000).length;
+
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
+  
+console.log(numDeposits1000);
+
+// Prefixed ++ operator
+let a = 10;
+console.log(++a);
+console.log(a);
+
+// 3.
+const { deposits, withdrawals } = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+      sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+      return sums;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+  
+console.log(deposits, withdrawals);
+
+// 4.
+// this is a nice title -> This Is a Nice Title
+const convertTitleCase = function (title) {
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+
+  const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => (exceptions.includes(word) ? word : capitalize(word)))
+    .join(' ');
+
+  return capitalize(titleCase);
+};
+
+console.log(convertTitleCase('this is a nice title'));
+console.log(convertTitleCase('this is a LONG title but not too long'));
+console.log(convertTitleCase('and here is another title with an EXAMPLE'));
+*/
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -475,7 +550,7 @@ console.log(account);
 
 //////////////////////////////////////////////////
 // The some and every method
-
+/*
 console.log(movements);
 
 // Equality
@@ -489,3 +564,126 @@ console.log(anyDesposits);
 
 // EVERY
 console.log(movements.every(mov => mov === -130));
+*/
+
+//////////////////////////////////////////////////
+// The flat and flatMap
+/*
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+
+// só penetra um nível de loop, porém podemos selecionar o quanto queremos penetrar
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2));
+
+// const accountMovements = accounts.map(acc => acc.movements);
+// console.log(accountMovements.flat().reduce((acc, mov) => acc + mov, 0));
+
+// Overal Balance of accounts
+const overalBalance = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov);
+
+console.log(overalBalance);
+*/
+
+//////////////////////////////////////////////////
+// Sorting Arrays
+/*
+// Strings
+const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+console.log(owners.sort());
+console.log(owners);
+
+// Numbers
+console.log(movements);
+
+// return < 0, A, B (keep order)
+// return > 0, A, B (switch order)
+
+// Asceding
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+movements.sort((a, b) => a - b);
+console.log(movements);
+
+// console: -650, -400, -130, 70, 200, 450, 1300, 3000
+
+// Descending
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// });
+movements.sort((a, b) => b - a);
+console.log(movements);
+// console: 3000, 1300, 450, 200, 70, -130, -400, -650
+*/
+
+//////////////////////////////////////////////////
+// More Ways of Creating and Filling Arrays
+/*
+const arr = [1, 2, 3, 4, 5, 6, 7];
+console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+
+// Empety arrays + fill method
+const x = new Array(7);
+console.log(x);
+// console.log(x.map(() => 5));
+x.fill(1);
+x.fill(1, 3, 5); // 3 parameters  result in start, middle and end
+console.log(x);
+
+arr.fill(23, 4, 6);
+console.log(arr);
+
+// Array.from(), defination length, equal to the method "Map"
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(z);
+
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+
+  console.log(movementsUI);
+});
+*/
+// Resume
+/* 
+Wich array method to use? 🤔 "I want..."
+So do I want to mutate the original arry or do I want a new Array?
+Do I maybe want an array index, or do i want to retrieve an entire array element?
+Or do I want to know, if an array includes, a certain element, or maybe I just
+want to get a new String, to transform the array to a new value, or simply to loop
+over the array?
+
+To mutate original array: Add to original = ".push", ".unshift", Remove from original =
+".pop", ".shift", ".splice", Others = ".reverse", ".sort", ".fill"
+
+A new array: coomputed from original = ".map" (loop), filtered using 
+codition = ".filter", portion of original = ".slice", adding original
+to other = ".concat", flattening the original = ".flat", ".flatMap"
+
+An array index: Based on value = ".indexOf", Based on test 
+condition = ".findIndex"
+
+An array Element: Based on test condition = ".find"
+
+Know if array includes: Based on value = ".includes",
+Based on test condition = ".some", ".every"
+
+A new String: Based on seperator string: ".join"
+
+To transform to value: Based on accumulator = ".reduce" (Boil down 
+array to single value of any type: number, string, boolean, or even
+new array or object)
+
+To just loop array: Based on callback = ".forEach" (Does not create a
+new array, just loops over it)
+*/
