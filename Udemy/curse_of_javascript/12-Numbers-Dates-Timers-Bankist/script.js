@@ -94,7 +94,7 @@ const displayMovements = function (movements, sort = false) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__value">${mov}€</div>
+        <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
     `;
 
@@ -104,7 +104,7 @@ const displayMovements = function (movements, sort = false) {
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance}€`;
+  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
 };
 
 const calcDisplaySummary = function (acc) {
@@ -116,7 +116,7 @@ const calcDisplaySummary = function (acc) {
   const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(out)}€`;
+  labelSumOut.textContent = `${Math.abs(out).toFixed(2)}€`;
 
   const interest = acc.movements
     .filter(mov => mov > 0)
@@ -126,7 +126,7 @@ const calcDisplaySummary = function (acc) {
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest}€`;
+  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
 };
 
 const createUsernames = function (accs) {
@@ -251,3 +251,102 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+///////////////////////////////////////
+// Converting and Checking Numbers
+/*
+console.log(23 === 23.0);
+
+// Base 10 - 0 to 9. 1/10 = 0.1. 3/10 = 3.3333333
+// Binary base 2 - 0 1
+console.log(0.1 + 0.2);
+console.log(0.1 + 0.2 === 0.3);
+
+// Conversion
+console.log(Number('23'));
+console.log(+'23');
+
+// Parsing
+console.log(Number.parseInt('30px', 10));
+console.log(Number.parseInt('e23', 10));
+
+console.log(Number.parseInt('  2.5rem  '));
+console.log(Number.parseFloat('  2.5rem  '));
+
+// console.log(parseFloat('  2.5rem  '));
+
+console.log(Number.isNaN(20));
+console.log(Number.isNaN('20'));
+console.log(Number.isNaN(+'20'));
+console.log(Number.isNaN(23 / 0));
+
+// Checking if value is Number
+console.log(Number.isFinite(20));
+console.log(Number.isFinite('20'));
+console.log(Number.isFinite(+'20'));
+console.log(Number.isFinite(23 / 0));
+*/
+
+///////////////////////////////////////
+// Math and Rounding
+/*
+// .sqrt
+console.log(Math.sqrt(25));
+console.log(25 ** (1 / 2));
+console.log(8 ** (1 / 3));
+
+// .max
+console.log(Math.max(5, 18, 23, 11, 2));
+console.log(Math.max(5, 18, '23', 11, 2));
+console.log(Math.max(5, 18, '23px', 11, 2));
+
+// .min
+console.log(Math.min(5, 18, 23, 11, 2));
+
+// .PI
+console.log(Math.PI * Number.parseFloat('10px') ** 2);
+
+// .random
+console.log(Math.trunc(Math.random() * 6));
+
+const randomInt = (min, max) =>
+  Math.trunc(Math.random() * (max - min) + 1) + min;
+// 0...1 -> 0...(max - min) -> min...max
+// console.log(randomInt(10, 20));
+
+// Rounding integers, "trunc" apenas retira os números após a vírgula convertendoo para um inteiro
+console.log(Math.trunc(23.3));
+// "Round" o número quebrado é arredondado para .5 acima para 24 por exemplo
+console.log(Math.round(23.3));
+console.log(Math.round(23.9));
+// "Ceil" arredonda números quebrados sempre para o próximo número
+console.log(Math.ceil(23.3));
+console.log(Math.ceil(23.9));
+// "Floor" arredonda o números quebrados para o número menor depois do .
+console.log(Math.floor(23.3));
+console.log(Math.floor('23.9'));
+
+// Rounding decimals
+console.log((2.7).toFixed(0));
+console.log((2.7).toFixed(3));
+console.log((2.345).toFixed(2));
+console.log(+(2.345).toFixed(2));
+*/
+
+///////////////////////////////////////
+// The Remainder Operator
+/*
+console.log(5 % 2);
+console.log(5 / 2); // 5 = 2 * 2 + 1
+
+const isEven = n => n % 2 === 0;
+console.log(isEven(8));
+console.log(isEven(23));
+console.log(isEven(514));
+*/
+labelBalance.addEventListener('click', function () {
+  [...document.querySelectorAll('.movements__row')].forEach(function (row, i) {
+    if (i % 2 === 0) row.style.backgroundColor = 'gray';
+    if (i % 2 === 1) row.style.backgroundColor = 'silver';
+  });
+});
