@@ -25,9 +25,12 @@ class App {
 
   _getPosition() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this._loadMap, function () {
-        alert('Could not get your position');
-      });
+      navigator.geolocation.getCurrentPosition(
+        this._loadMap.bind(this),
+        function () {
+          alert('Could not get your position');
+        }
+      );
     }
   }
 
@@ -37,6 +40,7 @@ class App {
 
     const coords = [latitude, longitude];
 
+    console.log(this);
     this.#map = L.map('map').setView(coords, 14);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -44,14 +48,14 @@ class App {
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.#map);
 
-    this.#map.on('click', function (mapE) {
-      this.#mapEvent = mapE;
-      form.classList.remove('hidden');
-      inputDistance.focus();
-    });
+    this.#map.on('click', this._showForm());
   }
 
-  _showForm() {}
+  _showForm(mapE) {
+    this.#mapEvent = mapE;
+    form.classList.remove('hidden');
+    inputDistance.focus();
+  }
 
   _toggleElevationField() {}
 
